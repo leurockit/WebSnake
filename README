@@ -1,0 +1,4 @@
+This is a pure web Javascript game.
+
+Requirements:
+  Browswers support HTML5 canvas, or IE with the 'excanvas.js' loaded.
