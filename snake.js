@@ -1,7 +1,7 @@
-//All right reserved com.albion.tao
+//All rights reserved com.albion.tao
 var thread;// main thread.
-var field;// the canvas field.
-var context;// the canvas context painter.
+var field = null;// the canvas field.
+var context = null;// the canvas context painter.
 var spiritUnit;// size of the spirit unit.
 var fieldUnit;// size of the field unit.
 var snake;// snake array.
@@ -12,11 +12,18 @@ var pause;// boolean var for pause game.
 var lock;// Thread lock to avoid double key down.
 var speed;// game speed.
 
+if (window.addEventListener) {
+    window.addEventListener("load", run, false);
+}
+else {
+    window.attachEvent("onload", run);
+}
+
 function init() {
 	// get canvas
-	field = document.getElementById("field");
+	field = document.getElementById('field');
 	// get canvas context
-	context = field.getContext("2d");
+	context = field.getContext('2d');
 	// initialize param
 	spiritUnit = 9;
 	fieldUnit = 10;
@@ -139,6 +146,12 @@ function drawSpirit() {
 	}
 	// draw snake
 	for ( var i = 0; i < snake.length; i++) {
+		// collapse itself
+		if(i>3&&head[0]==snake[i][0]&&head[1]==snake[i][1]){
+			end();
+			run();
+			break;
+		}
 		drawPoint(snake[i][0], snake[i][1], i % 2 == 0 ? "#FF5511" : "white");
 	}
 	// draw egg
